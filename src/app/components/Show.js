@@ -27,7 +27,7 @@ class Show extends React.Component {
 
 // Prop types validation
 Show.propTypes = {
-  item: React.PropTypes.object.isRequired,
+  show: React.PropTypes.object.isRequired,
 };
 
 export default Show;

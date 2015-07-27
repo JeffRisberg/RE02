@@ -33,7 +33,7 @@ class Channel extends React.Component {
 
 // Prop types validation
 Channel.propTypes = {
-  channel: React.PropTypes.object.isRequired,
+  channel: React.PropTypes.object.isRequired
 };
 
 export default Channel;
