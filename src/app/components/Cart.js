@@ -22,11 +22,11 @@ class Cart extends React.Component {
   render () {
     return <div className="cart">
       <h2>Cart: {this.props.cart.title}</h2>
-      <div className="row">
+      <table>
         {this.props.cart.items.map(function (item, key) {
           return <Item key={key} item={item} />;
         })}
-      </div>
+      </table>
     </div>;
   }
 }
