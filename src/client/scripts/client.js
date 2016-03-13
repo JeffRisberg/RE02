@@ -32,7 +32,7 @@ var state = {
   channel: {
     title: "Disney Channel",
     shows: [
-      { name: "The Lion King", channelId: "1-LK" },
+      { name: "The Lion King", channelId: "LK-564" },
       { name: "Pocahontas", channelId: "P-789" }
     ]
   }

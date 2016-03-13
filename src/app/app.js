@@ -10,7 +10,7 @@ var debug = Debug('myApp');
  */
 class App {
 
-  /*
+  /**
    * @constructs App
    * @param {Object} options
    */
@@ -20,7 +20,7 @@ class App {
     this.state = options.state;
   }
 
-  /*
+  /**
    * @method render
    * @param {DOM} [element]
    * @returns {String|undefined}
