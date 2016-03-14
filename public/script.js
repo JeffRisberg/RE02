@@ -1,7 +1,5 @@
 /** This uses JSX, but not ECMAscript 6 */
 
-console.log("a");
-
 var Comment = React.createClass({
     render: function () {
         var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -16,7 +14,6 @@ var Comment = React.createClass({
     }
 });
 
-console.log("a");
 /** Show the main display (list plus form) */
 var CommentBox = React.createClass({
     loadCommentsFromServer: function () {
@@ -70,7 +67,6 @@ var CommentBox = React.createClass({
     }
 });
 
-console.log("a");
 var CommentList = React.createClass({
     render: function () {
         var commentNodes = this.props.data.map(function (comment, index) {
@@ -114,7 +110,6 @@ var CommentForm = React.createClass({
     }
 });
 
-console.log("a");
 /** Request the main rendering here */
 ReactDOM.render(
     <CommentBox url="comments.json" pollInterval={2000}/>,
