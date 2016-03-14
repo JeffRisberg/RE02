@@ -1,30 +1,18 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 # RE02
 
-Getting started with React and ES6
+Based on the React tutorial.
 
-Used technologies:
+## To use
 
-- React
-- ES6
-- Webpack
-- Babel
-- Jest
+Start the server
 
-## How to start
+### Node
 
-Run:
-```
+```sh
 npm install
-npm start
+node server.js
 ```
 
-Check your http://localhost:3000/ or  `open http://localhost:3000/`
-
-## How to test
-
-`npm test`
-
-## How to start code
-
-Run:
-`npm run webpack-watch`
+And visit <http://localhost:3000/>. Try opening multiple tabs!
