@@ -6,7 +6,8 @@ var Comment = React.createClass({
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
-                    {this.props.author}
+                    {this.props.author}&nbsp;
+                    {this.props.date}
                 </h2>
                 <span dangerouslySetInnerHTML={{__html: rawMarkup}}/>
             </div>
@@ -74,7 +75,7 @@ var CommentList = React.createClass({
                 // `key` is a React-specific concept and is not mandatory for the
                 // purpose of this tutorial. if you're curious, see more here:
                 // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-                <Comment author={comment.author} key={index}>
+                <Comment author={comment.author} date={comment.date} key={index}>
                     {comment.text}
                 </Comment>
             );
@@ -91,11 +92,12 @@ var CommentForm = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
         var author = React.findDOMNode(this.refs.author).value.trim();
+        var date = React.findDOMNode(this.refs.date).value.trim();
         var text = React.findDOMNode(this.refs.text).value.trim();
         if (!text || !author) {
             return;
         }
-        this.props.onCommentSubmit({author: author, text: text});
+        this.props.onCommentSubmit({author: author, date: date, text: text});
         React.findDOMNode(this.refs.author).value = '';
         React.findDOMNode(this.refs.text).value = '';
     },
@@ -104,6 +106,7 @@ var CommentForm = React.createClass({
             <form className="commentForm" onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="Your name" ref="author"/>
                 <input type="text" placeholder="Say something..." ref="text"/>
+                <input type="hidden" ref="date" value={moment().format("MM/DD/YYYY")}/>
                 <input type="submit" value="Post"/>
             </form>
         );
