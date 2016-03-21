@@ -93,16 +93,16 @@ var CommentList = React.createClass({
 var CommentForm = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
-        var author = React.findDOMNode(this.refs.author).value.trim();
-        var datetimeStr = React.findDOMNode(this.refs.datetime).value.trim();
-        var text = React.findDOMNode(this.refs.text).value.trim();
+        var author = ReactDOM.findDOMNode(this.refs.author).value.trim();
+        var datetimeStr = ReactDOM.findDOMNode(this.refs.datetime).value.trim();
+        var text = ReactDOM.findDOMNode(this.refs.text).value.trim();
         if (!text || !author) {
             return;
         }
         var datetime = parseInt(datetimeStr);
         this.props.onCommentSubmit({author: author, datetime: datetime, text: text});
-        React.findDOMNode(this.refs.author).value = '';
-        React.findDOMNode(this.refs.text).value = '';
+        ReactDOM.findDOMNode(this.refs.author).value = '';
+        ReactDOM.findDOMNode(this.refs.text).value = '';
     },
     render: function () {
         return (
