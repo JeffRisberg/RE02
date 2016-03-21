@@ -2,13 +2,15 @@
 
 var Comment = React.createClass({
     render: function () {
+        var datetimeStr = this.props.datetime;
+        var datetime = parseInt(datetimeStr);
         var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
         return (
             <div className="comment">
-                <h2 className="commentAuthor">
-                    {this.props.author}&nbsp;
-                    {this.props.date}
-                </h2>
+                <span className="commentAuthor">
+                    {this.props.author}&nbsp;&nbsp;
+                    <em>on {moment(datetime).format("MM/DD/YYYY hh:mm:ss a")}</em>
+                </span>
                 <span dangerouslySetInnerHTML={{__html: rawMarkup}}/>
             </div>
         );
@@ -75,7 +77,7 @@ var CommentList = React.createClass({
                 // `key` is a React-specific concept and is not mandatory for the
                 // purpose of this tutorial. if you're curious, see more here:
                 // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-                <Comment author={comment.author} date={comment.date} key={index}>
+                <Comment author={comment.author} datetime={comment.datetime} key={index}>
                     {comment.text}
                 </Comment>
             );
@@ -92,12 +94,13 @@ var CommentForm = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
         var author = React.findDOMNode(this.refs.author).value.trim();
-        var date = React.findDOMNode(this.refs.date).value.trim();
+        var datetimeStr = React.findDOMNode(this.refs.datetime).value.trim();
         var text = React.findDOMNode(this.refs.text).value.trim();
         if (!text || !author) {
             return;
         }
-        this.props.onCommentSubmit({author: author, date: date, text: text});
+        var datetime = parseInt(datetimeStr);
+        this.props.onCommentSubmit({author: author, datetime: datetime, text: text});
         React.findDOMNode(this.refs.author).value = '';
         React.findDOMNode(this.refs.text).value = '';
     },
@@ -106,7 +109,7 @@ var CommentForm = React.createClass({
             <form className="commentForm" onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="Your name" ref="author"/>
                 <input type="text" placeholder="Say something..." ref="text"/>
-                <input type="hidden" ref="date" value={moment().format("MM/DD/YYYY")}/>
+                <input type="hidden" ref="datetime" value={moment()}/>
                 <input type="submit" value="Post"/>
             </form>
         );
