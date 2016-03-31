@@ -1,12 +1,9 @@
 /** application parameters of some sort */
 {
   "name": "RE02",
-  "description": "Based on the React tutorial",
+  "description": "Based on a React tutorial",
   "keywords": [ "react", "reactjs" ],
   "repository": "https://github.com/JeffRisberg/RE02",
-  "success_url": "/",
-  "env" : {
-    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-nodejs.git"
-  }
+  "success_url": "/"
 }
 

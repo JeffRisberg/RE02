@@ -1,8 +1,6 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
 # RE02
 
-Based on the React tutorial.
+Based on one of the React tutorials.
 
 ## To use
 
