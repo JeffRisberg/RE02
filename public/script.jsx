@@ -1,6 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 class Menu extends React.Component {
     render() {
         let menus = ['Home',
@@ -10,7 +7,7 @@ class Menu extends React.Component {
             'Contact us']
         return (
             <div>
-                {menus.map((v,i) => {
+                {menus.map((v, i) => {
                     return <div key={i}><Link label={v}/></div>
                 })}
             </div>
@@ -20,7 +17,7 @@ class Menu extends React.Component {
 
 class Link extends React.Component {
     render() {
-        const url='/'
+        const url = '/'
             + this.props.label
                 .toLowerCase()
                 .trim()
@@ -54,36 +51,25 @@ var Comment = React.createClass({
 /** Show the main display (list plus form) */
 var CommentBox = React.createClass({
     loadCommentsFromServer: function () {
-        $.ajax({
-            url: this.props.url,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                this.setState({data: data});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+        var me = this;
+
+        axios.get(this.props.url)
+            .then(function (response) {
+                me.setState({data: response.data});
+            });
     },
     handleCommentSubmit: function (comment) {
-        var comments = this.state.data;
+        var me = this,
+            comments = this.state.data;
         comments.push(comment);
+
         this.setState({data: comments}, function () {
             // `setState` accepts a callback. To avoid (improbable) race condition,
             // we'll send the ajax request right after we optimistically set the new state.
-            $.ajax({
-                url: this.props.url,
-                dataType: 'json',
-                type: 'POST',
-                data: comment,
-                success: function (data) {
-                    this.setState({data: data});
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
+            axios.post(this.props.url, comment)
+                .then(function (response) {
+                    me.setState({data: response.data});
+                });
         });
     },
     getInitialState: function () {
@@ -152,6 +138,9 @@ var CommentForm = React.createClass({
 
 /** Request the main rendering here */
 ReactDOM.render(
-    <CommentBox url="comments.json" pollInterval={2000}/>,
+    <div>
+        <Menu/>
+        <CommentBox url="comments.json" pollInterval={2000}/>
+    </div>,
     document.getElementById('content')
 );
