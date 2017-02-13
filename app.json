@@ -1,9 +1,0 @@
-/** application parameters of some sort */
-{
-  "name": "RE02",
-  "description": "Based on a React tutorial",
-  "keywords": [ "react", "reactjs" ],
-  "repository": "https://github.com/JeffRisberg/RE02",
-  "success_url": "/"
-}
-
