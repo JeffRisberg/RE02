@@ -4,7 +4,7 @@ class Menu extends React.Component {
             'About',
             'Services',
             'Portfolio',
-            'Contact us']
+            'Contact Us']
         return (
             <div>
                 {menus.map((v, i) => {
@@ -31,8 +31,8 @@ class Link extends React.Component {
     }
 }
 
-var Comment = React.createClass({
-    render: function () {
+class Comment extends React.Component {
+    render() {
         var datetimeStr = this.props.datetime;
         var datetime = parseInt(datetimeStr);
         var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -46,19 +46,28 @@ var Comment = React.createClass({
             </div>
         );
     }
-});
+}
 
 /** Show the main display (list plus form) */
-var CommentBox = React.createClass({
-    loadCommentsFromServer: function () {
+class CommentBox extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {data: []}
+
+        this.loadCommentsFromServer = this.loadCommentsFromServer.bind(this);
+        this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+    }
+
+    loadCommentsFromServer() {
         var me = this;
 
         axios.get(this.props.url)
             .then(function (response) {
                 me.setState({data: response.data});
             });
-    },
-    handleCommentSubmit: function (comment) {
+    }
+
+    handleCommentSubmit(comment) {
         var me = this,
             comments = this.state.data;
         comments.push(comment);
@@ -71,15 +80,14 @@ var CommentBox = React.createClass({
                     me.setState({data: response.data});
                 });
         });
-    },
-    getInitialState: function () {
-        return {data: []};
-    },
-    componentDidMount: function () {
+    }
+
+    componentDidMount() {
         this.loadCommentsFromServer();
         setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-    },
-    render: function () {
+    }
+
+    render() {
         return (
             <div className="commentBox">
                 <h1>Comments</h1>
@@ -88,10 +96,10 @@ var CommentBox = React.createClass({
             </div>
         );
     }
-});
+}
 
-var CommentList = React.createClass({
-    render: function () {
+class CommentList extends React.Component {
+    render() {
         var commentNodes = this.props.data.map(function (comment, index) {
             return (
                 // `key` is a React-specific concept and is not mandatory for the
@@ -108,10 +116,16 @@ var CommentList = React.createClass({
             </div>
         );
     }
-});
+}
 
-var CommentForm = React.createClass({
-    handleSubmit: function (e) {
+class CommentForm extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
         e.preventDefault();
         var author = ReactDOM.findDOMNode(this.refs.author).value.trim();
         var datetimeStr = ReactDOM.findDOMNode(this.refs.datetime).value.trim();
@@ -123,8 +137,9 @@ var CommentForm = React.createClass({
         this.props.onCommentSubmit({author: author, datetime: datetime, text: text});
         ReactDOM.findDOMNode(this.refs.author).value = '';
         ReactDOM.findDOMNode(this.refs.text).value = '';
-    },
-    render: function () {
+    }
+
+    render() {
         return (
             <form className="commentForm" onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="Your name" ref="author"/>
@@ -134,7 +149,7 @@ var CommentForm = React.createClass({
             </form>
         );
     }
-});
+}
 
 class Tooltip extends React.Component {
     constructor(props) {
@@ -142,6 +157,7 @@ class Tooltip extends React.Component {
         this.state = {opacity: false}
         this.toggle = this.toggle.bind(this)
     }
+
     toggle() {
         const tooltipNode = ReactDOM.findDOMNode(this)
         this.setState({
@@ -150,6 +166,7 @@ class Tooltip extends React.Component {
             left: tooltipNode.offsetLeft
         })
     }
+
     render() {
         const style = {
             zIndex: (this.state.opacity) ? 1000 : -1000,
@@ -177,24 +194,18 @@ class Tooltip extends React.Component {
 ReactDOM.render(
     <div>
         <Menu/>
-<div>
-    <Tooltip text="Master Express.js-The Node.js Framework For Your Web Development">Pro Express.js</Tooltip>
+        <div>
+            <Tooltip text="Master Express.js-The Node.js Framework For Your Web Development">Pro Express.js</Tooltip>
+            was published in 2014. It was one of the first books on v4.x.
+            And it was my second book published with Apress after <Tooltip
+            text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</Tooltip>.
 
-    was published in 2014. It was one of the first books on v4.x.
-    And it was my second book published with Apress after
-    <Tooltip text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</Tooltip>.
+            The main focus of this post is to compare the four Node.js/Io.js frameworks: <Tooltip
+            text="HTTP API server">Hapi</Tooltip>, <Tooltip text="Release the Kraken!">Kraken</Tooltip>, <Tooltip
+            text="Sail away">Sails.js</Tooltip> and <Tooltip text="IBM of frameworks">Loopback</Tooltip>.
 
-    The main focus of this post is to compare the four Node.js/Io.js frameworks:
-    <Tooltip text="HTTP API server">Hapi</Tooltip>,
-
-    <Tooltip text="Release the Kraken!">Kraken</Tooltip>,
-
-    <Tooltip text="Sail away">Sails.js</Tooltip> and
-
-    <Tooltip text="IBM of frameworks">Loopback</Tooltip>.
-
-    There are many other frameworks to consider, but I had to draw the line somewhere.
-</div>
+            There are many other frameworks to consider, but I had to draw the line somewhere.
+        </div>
         <CommentBox url="comments.json" pollInterval={2000}/>
     </div>,
     document.getElementById('content')
