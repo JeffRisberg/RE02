@@ -12,10 +12,10 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
-    "marked": "^0.3.6",
-    "moment": "^2.19.2",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "marked": "^0.3.7",
+    "moment": "^2.19.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
