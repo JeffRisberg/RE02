@@ -51,8 +51,8 @@ class Comment extends React.Component {
 /** Show the main display (list plus form) */
 class CommentBox extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = {data: []}
+        super(props);
+        this.state = {data: []};
 
         this.loadCommentsFromServer = this.loadCommentsFromServer.bind(this);
         this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
@@ -153,13 +153,13 @@ class CommentForm extends React.Component {
 
 class Tooltip extends React.Component {
     constructor(props) {
-        super(props)
-        this.state = {opacity: false}
+        super(props);
+        this.state = {opacity: false};
         this.toggle = this.toggle.bind(this)
     }
 
     toggle() {
-        const tooltipNode = ReactDOM.findDOMNode(this)
+        const tooltipNode = ReactDOM.findDOMNode(this);
         this.setState({
             opacity: !this.state.opacity,
             top: tooltipNode.offsetTop,
@@ -173,7 +173,7 @@ class Tooltip extends React.Component {
             opacity: +this.state.opacity,
             top: (this.state.top || 0) + 20,
             left: (this.state.left || 0) - 30
-        }
+        };
         return (
             <div style={{display: 'inline'}}>
         <span style={{color: 'blue'}} onMouseEnter={this.toggle} onMouseOut={this.toggle}>
