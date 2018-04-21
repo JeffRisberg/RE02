@@ -11,18 +11,18 @@
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.17.1",
-    "marked": "^0.3.12",
-    "moment": "^2.20.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "axios": "^0.18.0",
+    "marked": "^0.3.19",
+    "moment": "^2.22.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.25.0",
+    "babel-core": "^6.26.2",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "file-loader": "^1.1.6"
+    "express": "^4.16.3",
+    "file-loader": "^1.1.11"
   }
 }
