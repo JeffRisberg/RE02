@@ -14,8 +14,8 @@
     "axios": "^0.18.0",
     "marked": "^0.4.0",
     "moment": "^2.22.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
