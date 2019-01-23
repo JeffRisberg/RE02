@@ -12,8 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
-    "marked": "^0.5.2",
-    "moment": "^2.23.0",
+    "marked": "^0.6.0",
+    "moment": "^2.24.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   },
